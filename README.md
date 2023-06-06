@@ -1,1 +1,1 @@
-# LojaDeJogos
+# LojaDeAlimentos

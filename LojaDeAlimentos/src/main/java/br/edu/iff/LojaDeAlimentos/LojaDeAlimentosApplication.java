@@ -1,4 +1,4 @@
-package com.example.LojaDeAlimentos;
+package br.edu.iff.LojaDeAlimentos;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

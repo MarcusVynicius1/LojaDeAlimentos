@@ -1,21 +1,9 @@
 package br.edu.iff.LojaDeAlimentos.controller.apirest;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-
-import br.edu.iff.LojaDeAlimentos.entities.Cliente;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -63,15 +51,6 @@ public class MainRestController {
 	  HashMap<>(); erro.put("Erro", "Insira os valores!"); return erro; } }
 	 */
 
-	@PostMapping("/new/users")
-	@ResponseStatus(HttpStatus.CREATED)
-	public String registerPessoa(@ModelAttribute Cliente cliente) {
-		System.out.println("ID da pessoa: " + cliente.getId());
-		System.out.println("Nome da pessoa: " + cliente.getNome());
-		System.out.println("Email da pessoa: " + cliente.getEmail());
-		System.out.println("CPF da pessoa: " + cliente.getCpf());
-		System.out.println("Saldo da pessoa: " + cliente.getSaldoDisponivel());
-		return "Sucesso";
-	}
+	
 
 }

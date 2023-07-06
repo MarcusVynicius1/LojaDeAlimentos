@@ -1,21 +1,28 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Cliente extends Pessoa {
+public class Loja implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	private Endereco endereco;
-	private Carteira carteira;
+	private Long id;
+	private static final String nome = "Loja De Alimentos";
+	private static final String cnpj = "62.958.432/0001-13";
 
-	public Cliente(String nome, String email, String cpf, String password) {
-		super(nome, email, cpf, password);
-		this.carteira = new Carteira(0);
+	private Endereco endereco;
+
+
+	public Loja() {
+
 	}
 
 	public Endereco getEndereco() {
@@ -26,11 +33,4 @@ public class Cliente extends Pessoa {
 		this.endereco = endereco;
 	}
 
-	public Carteira getCarteira() {
-		return carteira;
-	}
-
-	public void setCarteira(Carteira carteira) {
-		this.carteira = carteira;
-	}
 }

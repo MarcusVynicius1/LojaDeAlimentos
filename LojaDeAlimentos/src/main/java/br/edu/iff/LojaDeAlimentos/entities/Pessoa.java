@@ -1,22 +1,32 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
-public abstract class Pessoa {
+import java.io.Serializable;
 
-	private String id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+
+@MappedSuperclass
+public abstract class Pessoa implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String nome;
 	private String email;
 	private String cpf;
 	private String password;
 
-	public Pessoa(String id, String nome, String email, String cpf, String password) {
-		this.id = id;
+	public Pessoa(String nome, String email, String cpf, String password) {
 		this.nome = nome;
 		this.email = email;
 		this.cpf = cpf;
 		this.password = password;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 

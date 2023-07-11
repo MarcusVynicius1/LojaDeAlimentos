@@ -23,7 +23,6 @@ public class MainControllerView {
 		System.out.println("Nome da pessoa: " + cliente.getNome());
 		System.out.println("Email da pessoa: " + cliente.getEmail());
 		System.out.println("CPF da pessoa: " + cliente.getCpf());
-		System.out.println("Saldo da pessoa: " + cliente.getSaldoDisponivel());
 		return "sucesso";
 	}
 	

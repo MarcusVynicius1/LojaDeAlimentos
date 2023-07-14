@@ -3,6 +3,7 @@ package br.edu.iff.LojaDeAlimentos.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,11 +20,15 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	@Temporal(TemporalType.TIME)
+	@Column(nullable = false)
 	private Calendar dataHora;
+	@Column(nullable = false)
 	@Temporal(TemporalType.DATE)
 	private Calendar inicio;
 	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
 	private Calendar termino;
+	@Column(nullable = false)
 	private int quantidade;
 	@ManyToOne
 	private Cliente cliente;

@@ -2,6 +2,8 @@ package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
 import java.util.Collection;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,19 +20,18 @@ public class Loja implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
 	private static final String nome = "Loja De Alimentos";
+	@Column(nullable = false)
 	private static final String cnpj = "62.958.432/0001-13";
 	@OneToOne
-	private static final Endereco endereco = new Endereco("a", 2, "b", "c", "d", "e");
+	private static final Endereco endereco = new Endereco("Rua das pedras", 24, "Parque Palmeiras",
+			"Campos dos Goytacazes", "RJ", "28180-932");
 	@ElementCollection
 	@OneToMany
 	private Collection<Alimento> alimento;
 
 	public Loja() {
-	}
-
-	public Collection<Alimento> getAlimento() {
-		return alimento;
 	}
 
 	public static long getSerialversionuid() {

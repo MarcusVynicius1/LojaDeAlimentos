@@ -1,26 +1,22 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
 public class Cliente extends Pessoa {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@OneToOne
-	@JoinColumn(name = "id_endereco")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_endereco", referencedColumnName = "id", nullable = false)
 	private Endereco endereco;
 	@OneToOne
-	@JoinColumn(name = "id_carteira")
+	@JoinColumn(name = "id_carteira", referencedColumnName = "id", nullable = false)
 	private Carteira carteira;
 	@ElementCollection
 	private Collection<String> telefones;
@@ -28,11 +24,16 @@ public class Cliente extends Pessoa {
 	private Collection<Compra> compras;
 
 	public Cliente(String nome, String email, String cpf, String password, Endereco endereco, Carteira carteira,
-			String telefones) {
+			String telefone) {
 		super(nome, email, cpf, password);
 		this.endereco = endereco;
 		this.carteira = carteira;
-		this.telefones.add(telefones);
+		this.telefones = new ArrayList<>();
+		this.telefones.add(telefone);
+	}
+
+	public Cliente() {
+
 	}
 
 	public Endereco getEndereco() {
@@ -55,7 +56,7 @@ public class Cliente extends Pessoa {
 		return telefones;
 	}
 
-	public void setTelefones(String telefones) {
-		this.telefones.add(telefones);
+	public void setTelefones(Collection<String> telefones) {
+		this.telefones = telefones;
 	}
 }

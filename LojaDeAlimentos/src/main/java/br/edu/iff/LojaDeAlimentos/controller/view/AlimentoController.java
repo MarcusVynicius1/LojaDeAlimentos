@@ -19,7 +19,7 @@ public class AlimentoController {
 	
 	@PostMapping("/saveAlimento")
 	public String registerAlimento(@ModelAttribute Alimento alimento) {
-		//System.out.println("ID do alimento: " + alimento.getId());
+		System.out.println("ID do alimento: " + alimento.getId());
 		System.out.println("Nome do alimento: " + alimento.getNome());
 		System.out.println("Preco do alimento: " + alimento.getPreco());
 		System.out.println("Tipo de alimento: " + alimento.getTipoAlimento());

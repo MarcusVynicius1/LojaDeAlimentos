@@ -2,6 +2,7 @@ package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,21 +15,35 @@ public class Endereco implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
 	private String rua;
+	@Column(nullable = false)
 	private int numero;
+	@Column(nullable = false)
 	private String bairro;
+	@Column(nullable = false)
 	private String cidade;
+	@Column(nullable = false)
 	private String estado;
+	@Column(nullable = false)
 	private String cep;
 
 	public Endereco(String rua, int numero, String bairro, String cidade, String estado, String cep) {
-		super();
 		this.rua = rua;
 		this.numero = numero;
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.estado = estado;
 		this.cep = cep;
+	}
+
+	public Endereco() {
+
+	}
+
+	public String enderecoFormatado() {
+		return this.rua + ", " + this.numero + " - " + this.bairro + ", " + this.cidade + " - " + this.estado + ", "
+				+ this.cep;
 	}
 
 	public Long getId() {

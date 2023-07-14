@@ -3,6 +3,7 @@ package br.edu.iff.LojaDeAlimentos.entities;
 import java.io.Serializable;
 import java.util.Collection;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -18,16 +19,16 @@ public class Alimento implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false)
 	private float preco;
 	@Enumerated(EnumType.ORDINAL)
 	private TipoAlimento tipoAlimento;
 	@OneToMany(mappedBy = "alimento")
 	private Collection<Compra> compras;
 	
-	public Alimento(Long id, String nome, float preco, TipoAlimento tipoAlimento) {
-		super();
-		this.id = id;
+	public Alimento(String nome, float preco, TipoAlimento tipoAlimento) {
 		this.nome = nome;
 		this.preco = preco;
 		this.tipoAlimento = tipoAlimento;

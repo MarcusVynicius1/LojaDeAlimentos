@@ -1,7 +1,10 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
+import jakarta.persistence.Column;
+
 public enum TipoAlimento {
 
+	@Column(nullable = false)
 	Legume(1), Verdura(2), Laticinio(3), Fruta(4), Carne(5);
 
 	private final int cod;

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Lista de Alimentos Disponíveis</title>
+</head>
+<body>
+<h1>Lista de Alimentos Disponíveis</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Tipo de Alimento</th>
+        <th>Ação</th>
+    </tr>
+    <!-- Loop para exibir os alimentos disponíveis -->
+    <tr th:each="alimento : ${alimentos}">
+        <td th:text="${alimento.id}"></td>
+        <td th:text="${alimento.nome}"></td>
+        <td th:text="${alimento.preco}"></td>
+        <td th:text="${alimento.tipoAlimento}"></td>
+        <td>
+            <!-- Botão para adicionar o alimento à lista de compras -->
+            <form action="/listaCompras/adicionarAlimento" method="post">
+                <!-- Hidden input para enviar o ID do cliente (você pode substituir o valor 1 pelo ID do cliente real) -->
+                <input type="hidden" name="clienteId" value="1">
+                <!-- Hidden input para enviar o ID do alimento -->
+                <input type="hidden" name="alimentoId" th:value="${alimento.id}">
+                <button type="submit">Adicionar à Lista</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

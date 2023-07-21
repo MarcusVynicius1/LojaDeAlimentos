@@ -7,5 +7,5 @@ import br.edu.iff.LojaDeAlimentos.entities.Funcionario;
 
 @Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
-
+	
 }

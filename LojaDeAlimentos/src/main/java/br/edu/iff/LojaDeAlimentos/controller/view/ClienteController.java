@@ -35,7 +35,7 @@ public class ClienteController {
 
 	@GetMapping
 	public String page() {
-		return "cliente";
+		return "layoutBase";
 	}
 
 	@PostMapping("/addCliente")

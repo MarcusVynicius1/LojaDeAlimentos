@@ -2,21 +2,26 @@ package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 
-@Entity
+@MappedSuperclass
 public abstract class Pessoa implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(nullable = false)
 	private String nome;
+	@Column(nullable = false)
 	private String email;
+	@Column(nullable = false)
 	private String cpf;
+	@Column(nullable = false)
 	private String password;
 
 	public Pessoa(String nome, String email, String cpf, String password) {
@@ -25,9 +30,29 @@ public abstract class Pessoa implements Serializable {
 		this.cpf = cpf;
 		this.password = password;
 	}
+	
+	public Pessoa() {
+		
+	}
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 	public String getNome() {

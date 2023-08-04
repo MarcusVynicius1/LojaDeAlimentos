@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Alimento</title>
+</head>
+<body>
+    <h1>Editar Alimento</h1>
+    <form action="/alimento/atualizar" method="post" th:object="${alimento}">
+        <input type="hidden" th:field="*{id}"> <!-- Campo oculto para enviar o ID do alimento -->
+        <label for="nome">Nome:</label><br>
+        <input type="text" id="nome" th:field="*{nome}"><br>
+
+        <label for="preco">Preço:</label><br>
+        <input type="number" id="preco" th:field="*{preco}"><br>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+</body>
+</html>

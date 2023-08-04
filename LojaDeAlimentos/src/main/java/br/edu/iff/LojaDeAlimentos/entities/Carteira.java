@@ -2,6 +2,7 @@ package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +17,22 @@ public class Carteira implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@Column(nullable = false)
 	private double saldoDisponivel;
 
 	public Carteira(double saldoDisponivel) {
+		this.saldoDisponivel = saldoDisponivel;
+	}
+	
+	public Carteira() {
+		
+	}
+
+	public double getSaldoDisponivel() {
+		return saldoDisponivel;
+	}
+
+	public void setSaldoDisponivel(double saldoDisponivel) {
 		this.saldoDisponivel = saldoDisponivel;
 	}
 

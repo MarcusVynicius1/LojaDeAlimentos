@@ -3,10 +3,14 @@ package br.edu.iff.LojaDeAlimentos.entities;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Compra implements Serializable {
@@ -15,57 +19,67 @@ public class Compra implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-    private Calendar dataHora;
-    private Calendar inicio;
-    private Calendar termino;
-    private int quantidade;
+	@Temporal(TemporalType.TIME)
+	@Column(nullable = false)
+	private Calendar dataHora;
+	@Column(nullable = false)
+	@Temporal(TemporalType.DATE)
+	private Calendar inicio;
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	private Calendar termino;
+	@Column(nullable = false)
+	private int quantidade;
+	@ManyToOne
+	private Cliente cliente;
+	@ManyToOne
+	private Alimento alimento;
 
-    public Compra(Long id, Calendar dataHora, Calendar inicio, Calendar termino, int quantidade) {
-        this.id = id;
-        this.dataHora = dataHora;
-        this.inicio = inicio;
-        this.termino = termino;
-        this.quantidade = quantidade;
-    }
+	public Compra(Long id, Calendar dataHora, Calendar inicio, Calendar termino, int quantidade) {
+		this.id = id;
+		this.dataHora = Calendar.getInstance();
+		this.inicio = inicio;
+		this.termino = termino;
+		this.quantidade = quantidade;
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public Calendar getDataHora() {
-        return dataHora;
-    }
+	public Calendar getDataHora() {
+		return dataHora;
+	}
 
-    public void setDataHora(Calendar dataHora) {
-        this.dataHora = dataHora;
-    }
+	public void setDataHora(Calendar dataHora) {
+		this.dataHora = dataHora;
+	}
 
-    public Calendar getInicio() {
-        return inicio;
-    }
+	public Calendar getInicio() {
+		return inicio;
+	}
 
-    public void setInicio(Calendar inicio) {
-        this.inicio = inicio;
-    }
+	public void setInicio(Calendar inicio) {
+		this.inicio = inicio;
+	}
 
-    public Calendar getTermino() {
-        return termino;
-    }
+	public Calendar getTermino() {
+		return termino;
+	}
 
-    public void setTermino(Calendar termino) {
-        this.termino = termino;
-    }
+	public void setTermino(Calendar termino) {
+		this.termino = termino;
+	}
 
-    public int getQuantidade() {
-        return quantidade;
-    }
+	public int getQuantidade() {
+		return quantidade;
+	}
 
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
 }
-

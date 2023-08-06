@@ -6,13 +6,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping(path = "/api/v1")
 public class MainRestController {
 
 	@GetMapping
 	@ResponseBody
 	public String initial() {
-		return "teste";
+		return "Olá, bem vindo a API do meu APP.";
 	}
 
 	/*

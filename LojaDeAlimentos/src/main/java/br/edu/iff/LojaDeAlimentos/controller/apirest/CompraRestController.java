@@ -1,10 +1,10 @@
-package br.edu.iff.LojaDeAlimentos.controller.view;
+package br.edu.iff.LojaDeAlimentos.controller.apirest;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("pessoa")
-public class PessoaController {
-	
+@RequestMapping(path= "/api/v1/compra")
+public class CompraRestController {
+
 }

@@ -19,11 +19,11 @@
             <td th:text="${alimento.preco}"></td>
             <td th:text="${alimento.tipoAlimento}"></td>
             <td>
-                <a th:href="@{/alimento/editar(id=${alimento.id})}">Editar</a>
-                <a th:href="@{/alimento/excluir(id=${alimento.id})}">Excluir</a>
+                <button><a th:href="@{/alimento/editar(id=${alimento.id})}">Editar</a></button>
+              <button><a th:href="@{/alimento/excluir(id=${alimento.id})}">Excluir</a></button>
             </td>
         </tr>
     </table>
-    <a href="/alimento/cadastro">Adicionar Alimento</a>
+    <button><a href="/alimento/cadastro">Adicionar Alimento</a></button>
 </body>
 </html>

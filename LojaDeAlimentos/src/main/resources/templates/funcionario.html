@@ -11,18 +11,18 @@
 <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/sign-in/">
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-<style th:insert="~{layoutBase :: styleLB}"></style>
+<style th:insert="~{cliente :: styleLB}"></style>
 <link th:href="@{/css/sign-in.css}" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center py-4 bg-body-tertiary">
 	
 	<main class="form-signin w-100 m-auto">
-		<h1 th:insert="~{layoutBase :: cabecalho}"></h1>
+		<h1 th:insert="~{cliente :: cabecalho}"></h1>
 		<form action="/funcionario/addFuncionario" method="post">
-			<div th:insert="~{layoutBase :: userName}"></div>
-			<div th:insert="~{layoutBase :: email}"></div>
-			<div th:insert="~{layoutBase :: cpf}"></div>
-			<div th:insert="~{layoutBase :: password}"></div>
+			<div th:insert="~{cliente :: userName}"></div>
+			<div th:insert="~{cliente :: email}"></div>
+			<div th:insert="~{cliente :: cpf}"></div>
+			<div th:insert="~{cliente :: password}"></div>
 			<button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
 		</form>
 	</main>

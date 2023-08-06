@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +35,14 @@ public class ClienteController {
 
 	@GetMapping
 	public String page() {
-		return "layoutBase";
+		return "cliente";
+	}
+	
+	@GetMapping("/crud")
+	public String page2(Model model) {
+	    List<Cliente> clientes = clienteServ.findAll();
+	    model.addAttribute("clientes", clientes);
+	    return "listarClientes"; // nome do arquivo HTML que você criou para listar os clientes
 	}
 
 	@PostMapping("/addCliente")
@@ -60,7 +67,7 @@ public class ClienteController {
 
 		clienteServ.addCliente(cliente);
 
-		return "Cliente added --> " + cliente.getId();
+		return "sucesso";
 	}
 
 	@GetMapping("/getCliente")
@@ -99,14 +106,15 @@ public class ClienteController {
 
 	@PostMapping("/updateCliente")
 	@ResponseBody
-	public String updateCliente(@RequestParam Long id, @RequestBody Cliente clienteAtualizado) {
+	public String updateCliente(@RequestParam Long id, @ModelAttribute Cliente clienteAtualizado) {
 		Cliente cliente = clienteServ.findById(id);
 		if (cliente != null) {
 			cliente.setNome(clienteAtualizado.getNome());
 			cliente.setEmail(clienteAtualizado.getEmail());
-			// Atualizar outras propriedades do cliente conforme necessário
+			cliente.setPassword(clienteAtualizado.getPassword());
+			cliente.setCpf(clienteAtualizado.getCpf());
 			clienteServ.addCliente(cliente);
-			return "Cliente atualizado: " + cliente.getId();
+			return "sucesso";
 		} else {
 			return "Cliente não encontrado";
 		}
@@ -118,7 +126,7 @@ public class ClienteController {
 		Cliente cliente = clienteServ.findById(id);
 		if (cliente != null) {
 			clienteServ.deleteCliente(cliente);
-			return "Cliente excluído: " + cliente.getId();
+			return "sucesso";
 		} else {
 			return "Cliente não encontrado";
 		}

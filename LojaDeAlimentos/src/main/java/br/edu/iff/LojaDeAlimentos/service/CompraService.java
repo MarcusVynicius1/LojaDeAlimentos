@@ -12,9 +12,6 @@ import br.edu.iff.LojaDeAlimentos.repository.CompraRepository;
 public class CompraService {
 
 	@Autowired
-	CompraRepository compraRep;
-
-	@Autowired
 	CompraRepository CompraRep;
 
 	public Compra salvarCompra(Compra compra) {

@@ -1,7 +1,7 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
-import java.util.Calendar;
+import java.math.BigDecimal;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,77 +9,85 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 
 @Entity
 public class Compra implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@Temporal(TemporalType.TIME)
-	@Column(nullable = false)
-	private Calendar dataHora;
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Calendar inicio;
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	private Calendar termino;
-	@Column(nullable = false)
-	private int quantidade;
-	@ManyToOne
-	private Cliente cliente;
-	@ManyToOne
-	private Alimento alimento;
+    private static final long serialVersionUID = 1L;
 
-	public Compra(Long id, Calendar dataHora, Calendar inicio, Calendar termino, int quantidade) {
-		this.id = id;
-		this.dataHora = Calendar.getInstance();
-		this.inicio = inicio;
-		this.termino = termino;
-		this.quantidade = quantidade;
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-	public Long getId() {
-		return id;
-	}
+    @Column(nullable = false)
+    private int quantidade;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    @Column(name = "total")
+    private BigDecimal total;
 
-	public Calendar getDataHora() {
-		return dataHora;
-	}
+    @ManyToOne
+    private Cliente cliente;
 
-	public void setDataHora(Calendar dataHora) {
-		this.dataHora = dataHora;
-	}
+    @ManyToOne
+    private Alimento alimento;
 
-	public Calendar getInicio() {
-		return inicio;
-	}
+    public Compra() {
 
-	public void setInicio(Calendar inicio) {
-		this.inicio = inicio;
-	}
+    }
+    
+    public Compra(int quantidade, Cliente cliente, Alimento alimento) {
+        this.quantidade = quantidade;
+        this.cliente = cliente;
+        this.alimento = alimento;
+        calcularTotal();
+    }
 
-	public Calendar getTermino() {
-		return termino;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setTermino(Calendar termino) {
-		this.termino = termino;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public int getQuantidade() {
-		return quantidade;
-	}
+    public int getQuantidade() {
+        return quantidade;
+    }
 
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
-	}
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+
+    public BigDecimal getTotal() {
+        return total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+
+    public Alimento getAlimento() {
+        return alimento;
+    }
+
+    public void setAlimento(Alimento alimento) {
+        this.alimento = alimento;
+    }
+
+    // Método para calcular e definir o valor total da compra com base no preço unitário do alimento e na quantidade
+    public void calcularTotal() {
+        if (alimento != null) {
+            BigDecimal precoUnitario = BigDecimal.valueOf(alimento.getPreco());
+            BigDecimal valorTotal = precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+            this.total = valorTotal;
+        }
+    }
 }

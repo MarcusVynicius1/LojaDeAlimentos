@@ -59,4 +59,12 @@ public class Cliente extends Pessoa {
 	public void setTelefones(Collection<String> telefones) {
 		this.telefones = telefones;
 	}
+
+	public Collection<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(Collection<Compra> compras) {
+		this.compras = compras;
+	}
 }

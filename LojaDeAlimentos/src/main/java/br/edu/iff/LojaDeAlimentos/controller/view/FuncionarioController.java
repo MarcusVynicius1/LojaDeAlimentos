@@ -50,8 +50,8 @@ public class FuncionarioController {
 	}
 
 	@PostMapping("/deleteFuncionario")
-	public String deleteFuncionario(@RequestParam("id") Long id) {
-	    funcionarioServ.deleteFuncionario(id);
+	public String deleteFuncionario(@RequestParam("cpf") String cpf) {
+	    funcionarioServ.deleteFuncionario(cpf);
 	    return "redirect:/funcionario";
 	}
 

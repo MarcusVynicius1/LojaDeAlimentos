@@ -17,14 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.iff.LojaDeAlimentos.entities.Funcionario;
 import br.edu.iff.LojaDeAlimentos.service.FuncionarioService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping(path = "/api/v1/funcionario")
+@Tag(name = "Funcionários", description = "")
 public class FuncionarioRestController {
 	@Autowired
 	private FuncionarioService funcionarioService;
 
-	@PostMapping("/adicionar")
+	@PostMapping
 	@ResponseBody
 	@ResponseStatus(HttpStatus.CREATED)
 	public Funcionario addFuncionario(@RequestBody Funcionario funcionario) {
@@ -32,26 +34,36 @@ public class FuncionarioRestController {
 		return funcionario;
 	}
 
-
-	@PutMapping("/atualizar")
+	@PutMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public Funcionario updateFuncionario(@RequestBody Funcionario funcionario) {		
-		Funcionario func = funcionarioService.updateFuncionario(funcionario);
+	public Funcionario updateFuncionario(@PathVariable Long id, @RequestBody Funcionario funcionario) {
+	    Funcionario func = funcionarioService.findById(id);
+
+	    if (func == null) {	        
+	        return null;
+	    }	    
+	    func.setNome(funcionario.getNome());
+	    func.setEmail(funcionario.getEmail());
+	    func.setPassword(funcionario.getPassword());
+	    func.setCpf(funcionario.getCpf());	    
+	    func = funcionarioService.updateFuncionario(func);
+
 	    return func;
 	}
 
-	@DeleteMapping("/deletar/{id}")
+
+	@DeleteMapping("/{id}")
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
-	public String deletarFuncionario(@PathVariable("id") Long id) throws Exception {
-	    Funcionario fBusca = funcionarioService.findById(id);
-	    if (fBusca == null) {
-	        return "Funcionario não encontrado";
-	    } else {
-	        funcionarioService.deleteFuncionario(id);
-	        return "funcionário excluído";
-	    }
+	public String deletarFuncionarioPor(@PathVariable Long id) {
+		Funcionario fBusca = funcionarioService.findById(id);
+		if (fBusca == null) {
+			return "Funcionario não encontrado";
+		} else {
+			funcionarioService.deleteFuncionario(fBusca.getCpf());
+			return "funcionário excluído";
+		}
 	}
 
 	@GetMapping("")
@@ -59,7 +71,8 @@ public class FuncionarioRestController {
 		return funcionarioService.findAll();
 	}
 
-	@GetMapping("/buscar/{id}")
+	@GetMapping("/{id}")
+	@ResponseBody
 	public Funcionario buscarFuncionarioId(@PathVariable("id") Long id) throws Exception {
 		return funcionarioService.findById(id);
 	}

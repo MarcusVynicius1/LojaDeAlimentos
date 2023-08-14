@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.iff.LojaDeAlimentos.entities.Compra;
+import br.edu.iff.LojaDeAlimentos.repository.ClienteRepository;
 import br.edu.iff.LojaDeAlimentos.repository.CompraRepository;
 
 @Service
@@ -13,6 +14,8 @@ public class CompraService {
 
 	@Autowired
 	CompraRepository CompraRep;
+	@Autowired
+	ClienteRepository clienteRep;
 
 	public Compra salvarCompra(Compra compra) {
 		return CompraRep.save(compra);
@@ -30,7 +33,7 @@ public class CompraService {
 		CompraRep.deleteById(compraId);
 	}
 
-	public List<Compra> listarCompras() throws Exception {
+	public List<Compra> listarCompras(){
 		return CompraRep.findAll();
 	}
 
@@ -38,13 +41,6 @@ public class CompraService {
 		return CompraRep.BuscarPeloId(id);
 	}
 
-	public void flush() {
-		CompraRep.flush();
-	}
-
-	public void deletarCompra(Compra compra) {
-		CompraRep.delete(compra);
-	}
 
 	public Long buscarPeloIDCliente(Long id) {
 		return CompraRep.BuscarPeloIdCliente(id);

@@ -5,8 +5,6 @@ import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,12 +21,12 @@ public class Alimento implements Serializable{
 	private String nome;
 	@Column(nullable = false)
 	private float preco;
-	@Enumerated(EnumType.ORDINAL)
-	private TipoAlimento tipoAlimento;
+	@Column(nullable = false)
+	private String tipoAlimento;
 	@OneToMany(mappedBy = "alimento")
 	private Collection<Compra> compras;
 	
-	public Alimento(String nome, float preco, TipoAlimento tipoAlimento) {
+	public Alimento(String nome, float preco, String tipoAlimento) {
 		this.nome = nome;
 		this.preco = preco;
 		this.tipoAlimento = tipoAlimento;
@@ -62,11 +60,11 @@ public class Alimento implements Serializable{
 		this.preco = preco;
 	}
 
-	public TipoAlimento getTipoAlimento() {
+	public String getTipoAlimento() {
 		return tipoAlimento;
 	}
 
-	public void setTipoAlimento(TipoAlimento tipoAlimento) {
+	public void setTipoAlimento(String tipoAlimento) {
 		this.tipoAlimento = tipoAlimento;
 	}
 

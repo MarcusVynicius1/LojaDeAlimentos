@@ -37,12 +37,12 @@ public class ClienteController {
 	public String page() {
 		return "cliente";
 	}
-	
+
 	@GetMapping("/crud")
 	public String page2(Model model) {
-	    List<Cliente> clientes = clienteServ.findAll();
-	    model.addAttribute("clientes", clientes);
-	    return "listarClientes"; // nome do arquivo HTML que você criou para listar os clientes
+		List<Cliente> clientes = clienteServ.findAll();
+		model.addAttribute("clientes", clientes);
+		return "listarClientes"; // nome do arquivo HTML que você criou para listar os clientes
 	}
 
 	@PostMapping("/addCliente")
@@ -85,34 +85,39 @@ public class ClienteController {
 	@GetMapping("/getClienteId")
 	@ResponseBody
 	public ResponseEntity<Cliente> getCliente(@RequestParam Long id) {
-	    try {
-	        Cliente cliente = clienteServ.findById(id);
-	        return ResponseEntity.ok(cliente);
-	    } catch (EntityNotFoundException e) {
-	        return ResponseEntity.notFound().build(); // Retorna status 404 - Not Found
-	    }
+		try {
+			Cliente cliente = clienteServ.findById(id);
+			return ResponseEntity.ok(cliente);
+		} catch (EntityNotFoundException e) {
+			return ResponseEntity.notFound().build(); // Retorna status 404 - Not Found
+		}
 	}
-	
+
 	@GetMapping("/alterar")
-    public String showAlterarClienteForm(@RequestParam Long id, Model model) {
-        Cliente cliente = clienteServ.findById(id);
-        if (cliente != null) {
-            model.addAttribute("cliente", cliente);
-            return "alterarCliente";
-        } else {
-            return "clienteNaoEncontrado";
-        }
-    }
+	public String showAlterarClienteForm(@RequestParam Long id, Model model) {
+		Cliente cliente = clienteServ.findById(id);
+		if (cliente != null) {
+			model.addAttribute("cliente", cliente);
+			return "alterarCliente";
+		} else {
+			return "clienteNaoEncontrado";
+		}
+	}
 
 	@PostMapping("/updateCliente")
 	@ResponseBody
-	public String updateCliente(@RequestParam Long id, @ModelAttribute Cliente clienteAtualizado) {
+	public String updateCliente(@RequestParam Long id, @ModelAttribute Cliente clienteAtualizado,
+			@RequestParam(required = false) Double novoSaldo) {
 		Cliente cliente = clienteServ.findById(id);
 		if (cliente != null) {
 			cliente.setNome(clienteAtualizado.getNome());
 			cliente.setEmail(clienteAtualizado.getEmail());
 			cliente.setPassword(clienteAtualizado.getPassword());
 			cliente.setCpf(clienteAtualizado.getCpf());
+			Carteira carteira = cliente.getCarteira();
+			double saldoAtual = carteira.getSaldoDisponivel();
+			carteira.setSaldoDisponivel(saldoAtual + novoSaldo);
+			carteiraServ.addCarteira(carteira);
 			clienteServ.addCliente(cliente);
 			return "sucesso";
 		} else {

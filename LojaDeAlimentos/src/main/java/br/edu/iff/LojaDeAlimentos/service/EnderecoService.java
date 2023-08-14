@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.edu.iff.LojaDeAlimentos.entities.Endereco;
 import br.edu.iff.LojaDeAlimentos.repository.EnderecoRepository;
+
 @Service
 public class EnderecoService {
 
@@ -19,6 +20,14 @@ public class EnderecoService {
 
 	public List<Endereco> getEndereco() {
 		return res.selectAllEndereco();
+	}
+
+	public Endereco getEnderecoPorId(Long id) {
+		return res.findById(id).orElse(null);
+	}
+
+	public void removerEndereco(Long id) {
+		res.deleteById(id);
 	}
 
 }

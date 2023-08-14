@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import br.edu.iff.LojaDeAlimentos.entities.Alimento;
 import br.edu.iff.LojaDeAlimentos.repository.AlimentoRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AlimentoService {
 
 	@Autowired
 	AlimentoRepository alimentoRep;
+	@Autowired
+	AlimentoRepository alimentoRepository;
 
 	public Alimento salvarAlimento(Alimento alimento) {
 		return alimentoRep.save(alimento);
@@ -35,7 +38,11 @@ public class AlimentoService {
 	}
 	
 	public Alimento buscarAlimentoPorId(Long id) {
-        return alimentoRep.findById(id).orElse(null);
+        return alimentoRep.findById(id).orElseThrow(() -> new EntityNotFoundException("Alimento não encontrado"));
     }
 
+	public List<Alimento> listarAlimentosPorIds(List<Long> ids) {
+		return alimentoRepository.findAllById(ids);
+	}
+	
 }

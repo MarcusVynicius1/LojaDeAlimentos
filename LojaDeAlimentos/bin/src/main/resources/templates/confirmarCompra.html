@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmar Compra</title>
+</head>
+<body>
+    <h1>Confirmar Compra</h1>
+    <p>Total de gastos: R$ <span th:text="${total}"></span></p>
+    <form action="/compra/confirmarCompra" method="post">
+        <input type="hidden" name="clienteId" value="1"> <!-- Substitua pelo ID do cliente real -->
+        <input type="hidden" name="total" th:value="${total}">
+        <button type="submit">Confirmar Compra</button>
+    </form>
+</body>
+</html>

@@ -1,14 +1,19 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
 @Entity
 public class Compra implements Serializable {
@@ -18,76 +23,76 @@ public class Compra implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataHora;
+	private int qtdAlimentos;
+	private double precoFinal;
+	private boolean finalizado;
+	private String cpfCliente;
+	
+	@ManyToMany
+	@JoinTable(name = "associacao_compra_alimento",
+				joinColumns = @JoinColumn(name = "id_compra"),
+				inverseJoinColumns = @JoinColumn(name = "id_alimento"))
+	private List<Alimento> alimento;
 
-    @Column(nullable = false)
-    private int quantidade;
+	public Compra(String cpfCliente) {
+		this.finalizado = false;
+		this.qtdAlimentos = 0;
+		this.alimento = new ArrayList();
+		this.cpfCliente = cpfCliente;
+	}
 
-    @Column(name = "total")
-    private BigDecimal total;
+	public Compra(Long id, String cpfCliente) {
+		this.id = id;
+		this.finalizado = false;
+		this.qtdAlimentos = 0;
+		this.alimento = new ArrayList();
+		this.cpfCliente = cpfCliente;
+	}
 
-    @ManyToOne
-    private Cliente cliente;
+	public Long getId() {
+		return id;
+	}
 
-    @ManyToOne
-    private Alimento alimento;
+	public Calendar getDataHora() {
+		return dataHora;
+	}
 
-    public Compra() {
+	public int getQtdAlimentos() {
+		return qtdAlimentos;
+	}
 
-    }
-    
-    public Compra(int quantidade, Cliente cliente, Alimento alimento) {
-        this.quantidade = quantidade;
-        this.cliente = cliente;
-        this.alimento = alimento;
-        calcularTotal();
-    }
+	public double getPrecoFinal() {
+		return precoFinal;
+	}
+	
+	public String getCpfCliente() {
+		return cpfCliente;
+	}
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    public BigDecimal getTotal() {
-        return total;
-    }
-
-    public void setTotal(BigDecimal total) {
-        this.total = total;
-    }
-
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public Alimento getAlimento() {
-        return alimento;
-    }
-
-    public void setAlimento(Alimento alimento) {
-        this.alimento = alimento;
-    }
-
-    // Método para calcular e definir o valor total da compra com base no preço unitário do alimento e na quantidade
-    public void calcularTotal() {
-        if (alimento != null) {
-            BigDecimal precoUnitario = BigDecimal.valueOf(alimento.getPreco());
-            BigDecimal valorTotal = precoUnitario.multiply(BigDecimal.valueOf(quantidade));
-            this.total = valorTotal;
-        }
-    }
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
+	}
+	
+	public void adicionarAlimento(Alimento Alimento) {
+		this.alimento.add(Alimento);
+		this.qtdAlimentos++;
+		this.precoFinal+=Alimento.getPreco();
+	}
+	
+	public void removerAlimento(Alimento Alimento) {
+		this.alimento.remove(Alimento);
+		this.qtdAlimentos--;
+		this.precoFinal-=Alimento.getPreco();
+	}
+	
+	public void finalizar() {
+		this.finalizado = true;
+		this.dataHora = Calendar.getInstance();
+	}
+	
+	public boolean isFinalizado() {
+		return this.finalizado;
+	}
 }

@@ -1,4 +1,4 @@
-package br.edu.iff.LojaDeAlimentos.controller.view;
+	package br.edu.iff.LojaDeAlimentos.controller.view;
 
 import java.util.List;
 
@@ -49,14 +49,14 @@ public class AlimentoController {
 	}
 
 	@PostMapping("/atualizar")
-	public String atualizarAlimento(@ModelAttribute Alimento alimento) {
-		alimentoService.atualizarAlimento(alimento);
+	public String atualizarAlimento(@RequestParam String nome, double preco, String tipoALimento) {
+		alimentoService.atualizarAlimento(nome, preco, tipoALimento);
 		return "redirect:/alimento/listar";
 	}
 
 	@GetMapping("/excluir")
-	public String excluirAlimento(@RequestParam Long id) {
-		alimentoService.removerAlimento(id);
+	public String excluirAlimento(@RequestParam String nome) {
+		alimentoService.removerAlimento(nome);
 		return "redirect:/alimento/listar";
 	}
 

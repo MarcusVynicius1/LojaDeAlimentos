@@ -14,27 +14,44 @@ public class AlimentoService {
 
 	@Autowired
 	AlimentoRepository alimentoRep;
-	@Autowired
-	AlimentoRepository alimentoRepository;
 
-	public Alimento salvarAlimento(Alimento alimento) {
-		return alimentoRep.save(alimento);
+	public String salvarAlimento(Alimento alimento) {
+		if(alimentoRep.buscarPeloNome(alimento.getNome())!=null) {
+			return "Alimento já cadastrado";
+		}else{
+			Alimento a = alimentoRep.save(alimento);
+			return "Registrado no id "+a.getId();
+		}
 	}
 
 	public List<Alimento> listarAlimentos() {
 		return alimentoRep.findAll();
 	}
 
-	public Alimento atualizarAlimento(Alimento alimento) {
-		if (alimento.getId() != null) {
-			return alimentoRep.save(alimento);
-		} else {
-			throw new RuntimeException("Alimento inexistente. Primeiro adicione o alimento.");
+	public String atualizarAlimento(String nome, double preco, String tipoAlimento) {
+		Alimento a = alimentoRep.buscarPeloNome(nome);
+		if(a==null) {
+			return "Alimento não achado";
+		}else {		
+			if(preco > 0) {
+				a.setPreco(preco);
+			}
+			if(tipoAlimento !=null) {				
+				a.setTipoAlimento(tipoAlimento);
+			}
+			alimentoRep.flush();
+			return "Atualizado no id "+a.getId();
 		}
 	}
 
-	public void removerAlimento(Long alimentoId) {
-		alimentoRep.deleteById(alimentoId);
+	public String removerAlimento(String nome) {
+		Alimento a = alimentoRep.buscarPeloNome(nome);
+		if(a !=null) {	
+			alimentoRep.delete(a);
+			return "Alimento deletado no id "+a.getId();
+		}else {
+			return "Alimento não encontrado";
+		}
 	}
 	
 	public Alimento buscarAlimentoPorId(Long id) {
@@ -42,7 +59,7 @@ public class AlimentoService {
     }
 
 	public List<Alimento> listarAlimentosPorIds(List<Long> ids) {
-		return alimentoRepository.findAllById(ids);
+		return alimentoRep.findAllById(ids);
 	}
 	
 }

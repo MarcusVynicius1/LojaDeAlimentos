@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Alimentos</title>
+</head>
+<body>
+    <h1>Lista de Alimentos</h1>
+    <table>
+        <tr>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Tipo</th>
+            <th>Ações</th>
+        </tr>
+        <!-- Loop para exibir cada alimento na tabela -->
+        <tr th:each="alimento : ${alimentos}">
+            <td th:text="${alimento.nome}"></td>
+            <td th:text="${alimento.preco}"></td>
+            <td th:text="${alimento.tipoAlimento}"></td>
+            <td>
+                <button><a th:href="@{/alimento/editar(id=${alimento.id})}">Editar</a></button>
+              <button><a th:href="@{/alimento/excluir(id=${alimento.id})}">Excluir</a></button>
+            </td>
+        </tr>
+    </table>
+    <button><a href="/alimento/cadastro">Adicionar Alimento</a></button>
+</body>
+</html>

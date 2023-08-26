@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Visualizar Compra</title>
+</head>
+<body>
+	<h1>Detalhes da Compra</h1>
+	<p>
+		ID: <span th:text="${compra.id}"></span>
+	</p>
+	<p>
+		Data e Hora: <span th:text="${#dates.format(compra.dataHora, 'HH:mm:ss')}"></span>
+	</p>
+	<p>
+		Quantidade de Alimentos: <span th:text="${compra.qtdAlimentos}"></span>
+	</p>
+	<p>
+		Preço Final: <span th:text="${compra.precoFinal}"></span>
+	</p>
+	<p>
+		Cliente: <span th:text="${compra.cpfCliente}"></span>
+	</p>
+	<h2>Alimentos</h2>
+	<table>
+		<tr>
+			<th>Nome</th>
+			<th>Preço</th>
+			<th>Tipo</th>
+		</tr>
+		<th:block th:each="compra : ${compras}">
+			<tr>
+				<!-- ... outras colunas ... -->
+				<td>
+					<ul>
+						<li th:each="alimento : ${compra.alimento}"><span
+							th:text="${alimento.nome}"></span></li>
+					</ul>
+				</td>
+				<td><a th:href="@{/compra/{id}(id=${compra.id})}">Visualizar</a>
+				</td>
+			</tr>
+		</th:block>
+	</table>
+	<h2>Adicionar Alimento à Compra</h2>
+	<form th:action="@{/compra/{id}/adicionarAlimento(id=${compra.id})}"
+		method="post">
+		<label for="nomeAlimento">Nome do Alimento:</label><br> <input
+			type="text" id="nomeAlimento" name="nomeAlimento"><br>
+		<button type="submit" value="Adicionar">Adicionar</button>
+	</form>
+	<th:block th:if="${compra.finalizado}">
+        <p>Compra finalizada em: <span th:text="${#dates.format(compra.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
+    </th:block>
+    
+    <th:block th:unless="${compra.finalizado}">
+        <form th:action="@{/compra/{id}/finalizar(id=${compra.id})}" method="post">
+            <button type="submit">Finalizar Compra</button>
+        </form>
+    </th:block>
+</body>
+</html>

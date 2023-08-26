@@ -39,7 +39,7 @@ public class AlimentoRestController {
 	}
 
 	@PutMapping("/{id}")
-	public String atualizarE_Book(@PathVariable("id") Long id, double preco, String tipoAlimento) throws Exception {
+	public String atualizarAlimento(@PathVariable("id") Long id, double preco, String tipoAlimento) throws Exception {
 		Alimento alimentoBusca = alimentoService.buscarAlimentoPorId(id);
 		if (alimentoBusca == null) {
 			return "Alimento não achado";

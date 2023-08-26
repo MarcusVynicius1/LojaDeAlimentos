@@ -18,7 +18,7 @@
 	
 	<main class="form-signin w-100 m-auto">
 		<h1 th:insert="~{cliente :: cabecalho}"></h1>
-		<form action="/funcionario/addFuncionario" method="post">
+		<form action="#" th:action="@{/funcionario/addFuncionario}" th:object="${funcionario}" method="post">
 			<div th:insert="~{cliente :: userName}"></div>
 			<div th:insert="~{cliente :: email}"></div>
 			<div th:insert="~{cliente :: cpf}"></div>

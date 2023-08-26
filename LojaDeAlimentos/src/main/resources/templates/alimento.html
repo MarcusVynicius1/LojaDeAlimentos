@@ -6,14 +6,14 @@
 </head>
 <body>
     <h1>Formulário Alimento</h1>
-    <form action="/alimento/saveAlimento" method="post">
+    <form th:action="@{/alimento/saveAlimento}" method="post" th:object="${alimento}">
         <fieldset>
             <label for="nome">Nome:</label><br>
-            <input type="text" id="nome" name="nome"><br> 
+            <input type="text" id="nome" name="nome" th:field="*{nome}"><br> 
             <label for="preco">Preço:</label><br>
-            <input type="number" step="0.01" id="preco" name="preco"><br>
+            <input type="number" step="0.01" id="preco" name="preco" th:field="*{preco}"><br>
             <label for="tipoAlimento">Tipo de Alimento:</label><br>
-            <select id="tipoAlimento" name="tipoAlimento">
+            <select id="tipoAlimento" name="tipoAlimento" th:field="*{tipoAlimento}">
                 <option value="Fruta">Fruta</option>
                 <option value="Verdura">Verdura</option>
                 <option value="Carne">Carne</option>

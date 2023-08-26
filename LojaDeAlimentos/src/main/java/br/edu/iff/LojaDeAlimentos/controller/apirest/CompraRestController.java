@@ -26,7 +26,7 @@ public class CompraRestController {
 	private CompraService compraServ;
 
 	@PostMapping
-	public String addCompra(@PathVariable("id") Long id, String cpf) throws Exception {
+	public String addCompra(Long id, String cpf) {
 
 		return compraServ.addCompraAPI(id, cpf);
 

@@ -3,60 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <title>Visualizar Compra</title>
+<link th:href="@{/css/visualizarCompra.css}" rel="stylesheet">
 </head>
 <body>
-	<h1>Detalhes da Compra</h1>
-	<p>
-		ID: <span th:text="${compra.id}"></span>
-	</p>
-	<p>
-		Data e Hora: <span th:text="${#dates.format(compra.dataHora, 'HH:mm:ss')}"></span>
-	</p>
-	<p>
-		Quantidade de Alimentos: <span th:text="${compra.qtdAlimentos}"></span>
-	</p>
-	<p>
-		Preço Final: <span th:text="${compra.precoFinal}"></span>
-	</p>
-	<p>
-		Cliente: <span th:text="${compra.cpfCliente}"></span>
-	</p>
-	<h2>Alimentos</h2>
+	<button id="openModalButton">Detalhes da compra</button>
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span class="close" id="closeModal">&times;</span>
+			<h1>Detalhes da Compra</h1>
+			<p>
+				ID: <span th:text="${compra.id}"></span>
+			</p>
+			<p>
+				Data e Hora: <span
+					th:text="${#dates.format(compra.dataHora, 'HH:mm:ss')}"></span>
+			</p>
+			<p>
+				Quantidade de Alimentos: <span th:text="${compra.qtdAlimentos}"></span>
+			</p>
+			<p>
+				Preço Final: <span th:text="${compra.precoFinal}"></span>
+			</p>
+			<p>
+				Cliente: <span th:text="${compra.cpfCliente}"></span>
+			</p>
+		</div>
+	</div>
+
+	<h1>Lista de Alimentos</h1>
 	<table>
 		<tr>
 			<th>Nome</th>
 			<th>Preço</th>
 			<th>Tipo</th>
 		</tr>
-		<th:block th:each="compra : ${compras}">
-			<tr>
-				<!-- ... outras colunas ... -->
-				<td>
-					<ul>
-						<li th:each="alimento : ${compra.alimento}"><span
-							th:text="${alimento.nome}"></span></li>
-					</ul>
-				</td>
-				<td><a th:href="@{/compra/{id}(id=${compra.id})}">Visualizar</a>
-				</td>
-			</tr>
-		</th:block>
+		<tr th:each="alimento : ${alimentos}">
+			<td th:text="${alimento.nome}"></td>
+			<td th:text="${alimento.preco}"></td>
+			<td th:text="${alimento.tipoAlimento}"></td>
+			<td></td>
+		</tr>
 	</table>
-	<h2>Adicionar Alimento à Compra</h2>
-	<form th:action="@{/compra/{id}/adicionarAlimento(id=${compra.id})}"
-		method="post">
-		<label for="nomeAlimento">Nome do Alimento:</label><br> <input
-			type="text" id="nomeAlimento" name="nomeAlimento"><br>
-		<button type="submit" value="Adicionar">Adicionar</button>
-	</form>
+
+	<th:block th:unless="${compra.finalizado}">
+		<h2>Adicionar Alimento à Compra</h2>
+		<form th:action="@{/compra/{id}/adicionarAlimento(id=${compra.id})}"
+			method="post">
+			<label for="nomeAlimento">Nome do Alimento:</label><br> <input
+				type="text" id="nomeAlimento" name="nomeAlimento"><br>
+			<button type="submit" value="Adicionar">Adicionar</button>
+		</form>
+	</th:block>
 	<th:block th:if="${compra.finalizado}">
-        <p>Compra finalizada em: <span th:text="${#dates.format(compra.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></span></p>
-    </th:block>
-    
-    <th:block th:unless="${compra.finalizado}">
-        <form th:action="@{/compra/{id}/finalizar(id=${compra.id})}" method="post">
-            <button type="submit">Finalizar Compra</button>
-        </form>
-    </th:block>
+	</th:block>
+	<th:block th:if="${compra.finalizado}">
+		<p>
+			Compra finalizada em: <span
+				th:text="${#dates.format(compra.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></span>
+		</p>
+	</th:block>
+
+	<th:block th:unless="${compra.finalizado}">
+		<form th:action="@{/compra/{id}/finalizar(id=${compra.id})}"
+			method="post">
+			<button type="submit">Finalizar Compra</button>
+		</form>
+	</th:block>
+	<script>const openModalButton = document.getElementById('openModalButton');
+	const closeModal = document.getElementById('closeModal');
+	const modal = document.getElementById('modal');
+	const idSpan = document.getElementById('idSpan');
+	const dataHoraSpan = document.getElementById('dataHoraSpan');
+	const qtdAlimentosSpan = document.getElementById('qtdAlimentosSpan');
+	const precoFinalSpan = document.getElementById('precoFinalSpan');
+	const cpfClienteSpan = document.getElementById('cpfClienteSpan');
+
+	// Exemplo de dados da compra
+	const compra = {
+	    id: 123,
+	    dataHora: '2023-08-27T12:34:56',
+	    qtdAlimentos: 5,
+	    precoFinal: 50.00,
+	    cpfCliente: '123.456.789-00'
+	};
+
+	openModalButton.addEventListener('click', () => {
+	    modal.style.display = 'block';
+	    idSpan.textContent = compra.id;
+	    dataHoraSpan.textContent = compra.dataHora;
+	    qtdAlimentosSpan.textContent = compra.qtdAlimentos;
+	    precoFinalSpan.textContent = compra.precoFinal;
+	    cpfClienteSpan.textContent = compra.cpfCliente;
+	});
+
+	closeModal.addEventListener('click', () => {
+	    modal.style.display = 'none';
+	});
+</script>
 </body>
 </html>

@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>Listar Clientes</title>
 </head>
+<style>
+	table, th, td {
+		border: 1px solid black;
+		text-align: center;
+	}
+</style>
 <body>
     <h1>Listagem de Clientes</h1>
     <table>
@@ -21,6 +27,7 @@
             <td th:text="${cliente.nome}"></td>
             <td th:text="${cliente.email}"></td>
             <td th:text="${cliente.cpf}"></td>
+            <td th:text="${cliente.telefone}"></td>
   
             <td>
                 <form th:action="@{/cliente/deleteCliente}" method="post">

@@ -21,7 +21,7 @@
             <td th:text="${cliente.nome}"></td>
             <td th:text="${cliente.email}"></td>
             <td th:text="${cliente.cpf}"></td>
-            <td th:text="${cliente.telefones}"></td>
+  
             <td>
                 <form th:action="@{/cliente/deleteCliente}" method="post">
                     <input type="hidden" th:name="id" th:value="${cliente.id}" />

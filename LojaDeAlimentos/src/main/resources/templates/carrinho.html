@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
+
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carrinho</title>
 <link th:href="@{/css/teste.css}" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-<title>Site de Jogos</title>
 </head>
 
 <body>
-
 	<div class="topbar">
+	<button><a th:href="@{/compra/{id}(id=${compra.id})}">Comprar</a></button>
 		<div class="cart">
 			<i id="cartIcon" class="fa fa-shopping-cart"></i> <span
 				class="cart-count" th:text="${compra.qtdAlimentos}"></span>
@@ -50,7 +50,6 @@
 							<button type="submit">Finalizar Compra</button>
 						</form>
 					</th:block>
-					<button><a th:href="@{/compra/carrinho/{id}(id=${compra.id})}">Visualizar carrinho</a></button>
 				</div>
 			</div>
 		</div>
@@ -59,38 +58,23 @@
 		</div>
 
 	</div>
-
-	<div class="wrapper">
-		<div class="sidebar">
-			<ul>
-				<li><a href="#">Todos os Alimentos</a></li>
-				<br>
-				<li><a href="#">Verduras</a></li>
-				<br>
-				<li><a href="#">Legumes</a></li>
-				<br>
-				<li><a href="#">Frutas</a></li>
-				<br>
-				<li><a href="#">Carnes</a></li>
-			</ul>
-		</div>
-		<div class="grid-container">
-			<div th:each="alimento : ${alimentos}" class="card" th:classappend="${alimento.tipoAlimento}">
-			<div class="rectangle">
-				<h2 th:text="${alimento.nome}"></h2>
-				<p class="price">
-					R$ <span th:text="${alimento.preco}"></span>
-				</p>
+		<div class="container">
+			<div th:each="alimento : ${alimentos}" class="card"
+				th:classappend="${alimento.tipoAlimento}">
+				<div class="rectangle">
+					<h2 th:text="${alimento.nome}"></h2>
+					<p class="price">
+						R$ <span th:text="${alimento.preco}"></span>
+					</p>
 				</div>
-				<form th:action="@{/compra/{id}/adicionarAlimento(id=${compra.id})}"
-					method="post">
-					<label for="nomeAlimento" hidden></label><input type="text"
-						id="nomeAlimento" name="nomeAlimento" hidden
-						th:value="${alimento.nome}">
-					<button type="submit" value="Adicionar">Adicionar</button>
+				<form th:action="@{/compra/deletarAlimento}" method="post">
+					<input type="hidden" name="idCompra" th:value="${compra.id}" /> <input
+						type="hidden" name="nomeAlimento" th:value="${alimento.nome}" />
+					<button type="submit">Remover</button>
 				</form>
 			</div>
 		</div>
+		
 </body>
 <script>
 

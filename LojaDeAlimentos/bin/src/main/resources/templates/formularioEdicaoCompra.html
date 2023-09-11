@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Compra</title>
+</head>
+<body>
+    <h1>Formulário de Edição de Compra</h1>
+    <form action="/compra/{id}/editar" method="post">
+        <label for="cpfCliente">CPF do Cliente:</label><br>
+        <input type="text" id="cpfCliente" name="cpfCliente" th:value="${compra.cpfCliente}"><br>
+        <button type="submit" value="Editar">Editar</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,343 @@
+@charset "UTF-8";
+/* Estilos gerais */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #496174;
+	font-family: Arial, sans-serif;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Estilos para a barra lateral */
+.sidebar {
+	height: 100%;
+	width: 150px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: #222b32;
+	overflow-x: hidden;
+	padding-top: 20px;
+	color: #fff;
+}
+
+.sidebar h3 {
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.sidebar ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.sidebar li {
+	margin-bottom: 5px;
+}
+
+.sidebar a {
+	display: block;
+	padding: 10px;
+	text-decoration: none;
+	color: #fff;
+}
+
+.sidebar a:hover {
+	background-color: #fff;
+	color: #1c262b;
+}
+
+/* Estilos para a barra superior */
+.topbar {
+	width: 100%;
+	height: 70px;
+	background-color: #1c262b;
+	color: #fff;
+	display: flex;
+	align-items: center;
+}
+
+.balance {
+	margin-right: 10px;
+}
+
+.topbar .cart {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+	color: #fff;
+}
+
+.topbar .cart:hover {
+	color: #4CAF50;
+}
+
+.topbar .cart-icon {
+	font-size: 20px;
+	margin-right: 5px;
+}
+
+.topbar .auth {
+	display: flex;
+	align-items: center;
+}
+
+.topbar .auth button {
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	padding: 6px 12px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.topbar .auth button:hover {
+	background-color: #3e8e41;
+}
+/* Carrinho de compras */
+.cart {
+	display: flex;
+	align-items: center;
+	margin-left: auto;
+	font-size: 1.2rem;
+	color: #fff;
+	cursor: pointer;
+}
+
+.cart i {
+	margin-right: 5px;
+}
+
+.cart-count {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+	text-align: center;
+	font-size: 0.8rem;
+	font-weight: bold;
+	border-radius: 50%;
+	background-color: #ff5722;
+	color: #fff;
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 20px;
+	padding: 20px;
+	background-color: #496174;
+}
+
+.card {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 20px;
+	margin-left: 140px;
+	margin-right: 0px;
+	background-size: cover; /* Redimensiona a imagem para cobrir todo o elemento */
+    background-position: center; /* Centraliza a imagem */
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.card img {
+	max-width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+	
+}
+
+.card h2 {
+	font-size: 30px;
+	color: black;
+	margin: 10px;
+}
+
+.card p.price {
+	font-size: 20px;
+	font-weight: bold;
+	color: black;
+	margin: 10px;
+}
+
+.rectangle {
+    width: 300px;
+    height: 70px;
+    background-color: #e0e0e0;
+    border: 2px solid #333;
+    padding: 20px;
+    text-align: left; /* Alinha o texto à esquerda */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+}
+
+
+.rectangle p {
+    margin: 0; /* Remove margens padrão do parágrafo */
+}
+
+
+.card button.btn-buy {
+	background-color: #4CAF50;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	padding: 6px 12px;
+	margin-top: 10px;
+	cursor: pointer;
+	margin-bottom: -30px;
+}
+
+.card button.btn-buy:hover {
+	background-color: #3e8e41;
+}
+
+/* Imagem de fundo para alimentos do tipo "verdura" */
+.card.Verdura {
+	background-image: url("https://blog.plantei.com.br/wp-content/uploads/2017/09/Frutas-legumes-e-hortali%C3%A7as-2.jpg");
+	background-size: auto; /* Manter tamanho original da imagem */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+}
+
+/* Imagem de fundo para alimentos do tipo "fruta" */
+.card.Fruta {
+	background-image: url("https://ser.vitao.com.br/wp-content/uploads/2017/12/shutterstock_252338818-1-920x535.jpg");
+	background-size: auto; /* Manter tamanho original da imagem */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+}
+
+.card.Carne {
+	background-image: url("https://morarbemcomalguem.files.wordpress.com/2012/09/preparo-carnes.jpg");
+	background-size: auto; /* Manter tamanho original da imagem */
+    background-repeat: no-repeat; /* Não repetir a imagem */
+}
+
+.card.Legume {
+	background-image: url("https://conteudo.imguol.com.br/c/entretenimento/fa/2019/04/18/legumes-e-verduras-1555620381375_v2_615x300.jpg");
+	background-size: auto;
+    background-repeat: no-repeat;
+}
+
+/* Estilo para a janela modal */
+.modal {
+	display: none; /* Esconde a janela modal por padrão */
+	position: fixed; /* Mantém a janela modal fixa na tela */
+	z-index: 1; /* Define a ordem de empilhamento */
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	/* Permite rolar a tela quando a janela modal estiver aberta */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Cor de fundo semitransparente */
+}
+
+/* Estilo para o conteúdo da janela modal */
+.modal-content {
+	background-color: #bedef7;
+	margin: 10% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 40%;
+	border-radius: 10px;
+}
+
+/* Estilo para o botão de fechar a janela modal */
+.close {
+	color: #aaaaaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+/* Estilo para o botão de fechar a janela modal ao passar o mouse */
+.close:hover, .close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+label {
+	font-size: 1.2rem;
+	margin-bottom: 0.5rem;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+	padding: 0.5rem;
+	border-radius: 5px;
+	margin-bottom: 1rem;
+}
+
+button[type="submit"] {
+	background-color: #007bff;
+	color: #fff;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+	background-color: #0062cc;
+}
+/* Estilos para o modal */
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+	background-color: white;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 80%;
+}
+
+.close {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover, .close:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+

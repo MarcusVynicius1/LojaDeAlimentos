@@ -90,15 +90,12 @@ public class ClienteService {
 		Cliente c = ClienteRep.buscarPeloCPF(cpf);
 		if(c==null) {
 			return "Cliente não encontrado";
-		}else {		
-			if(c.getQtdTelefones()==3) {
-				return "Quatidade máxima de telefones já cadastrados";
-			}
+		}else {					
 			String t = ClienteRep.buscarTelefonePeloCPF(cpf, telefone);
 			if(t!=null) {
 				return "Telefone já cadastrado";
 			}else {
-				c.adicionarTelefone(telefone);
+				c.setTelefone(telefone);
 				ClienteRep.flush();
 				return "Telefone adicionado";
 			}

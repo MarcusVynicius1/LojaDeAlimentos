@@ -134,7 +134,7 @@ public class CompraService {
 				} else {
 					c.removerAlimento(a);
 					compraRep.flush();
-					return "Alimento removido";
+					return "sucesso";
 				}
 			}
 		}

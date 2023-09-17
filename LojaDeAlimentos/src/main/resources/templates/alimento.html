@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Cadastrar Alimento</title>
+<meta charset="UTF-8">
+<link th:href="@{/css/home.css}" rel="stylesheet" />
+<title>Cadastrar Alimento</title>
 </head>
 <body>
-    <h1>Formulário Alimento</h1>
-    <form th:action="@{/alimento/saveAlimento}" method="post" th:object="${alimento}">
-        <fieldset>
-            <label for="nome">Nome:</label><br>
-            <input type="text" id="nome" name="nome" th:field="*{nome}"><br> 
-            <label for="preco">Preço:</label><br>
-            <input type="number" step="0.01" id="preco" name="preco" th:field="*{preco}"><br>
-            <label for="tipoAlimento">Tipo de Alimento:</label><br>
-            <select id="tipoAlimento" name="tipoAlimento" th:field="*{tipoAlimento}">
-                <option value="Fruta">Fruta</option>
-                <option value="Verdura">Verdura</option>
-                <option value="Carne">Carne</option>
-                <option value="Legume">Legume</option>
-            </select>
-            <button type="submit" value="enviar">Enviar</button>
-        </fieldset>
-    </form>
+	<h1 class="h1Geral">Formulário Alimento</h1>
+	<div style="text-align: center; margin: 0 auto;">
+		<form th:action="@{/alimento/saveAlimento}" method="post"
+			th:object="${alimento}">
+
+			<label for="nome">Nome:</label> <input type="text" id="nome"
+				name="nome" th:field="*{nome}"
+				style="padding: 5px; border-radius: 10px"><br> <label
+				for="preco">Preço:</label> <input type="number" step="0.01"
+				id="preco" name="preco" th:field="*{preco}" style="padding: 5px; border-radius: 10px"><br> <label
+				for="tipoAlimento">Tipo de Alimento:</label> <select
+				id="tipoAlimento" name="tipoAlimento" th:field="*{tipoAlimento}" style="padding: 5px; border-radius: 10px">
+				<option value="Fruta" >Fruta</option>
+				<option value="Verdura">Verdura</option>
+				<option value="Carne">Carne</option>
+				<option value="Legume">Legume</option>
+			</select><br>
+			<button type="submit" value="enviar">Enviar</button>
+		</form>
+	</div>
 </body>
 </html>

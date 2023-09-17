@@ -4,21 +4,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Carrinho</title>
-<link th:href="@{/css/teste.css}" rel="stylesheet" />
+<link th:href="@{/css/comprar.css}" rel="stylesheet" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
 
 <body>
 	<div class="topbar">
-	<button><a th:href="@{/compra/{id}(id=${compra.id})}">Comprar</a></button>
+	<button style="padding: 5px; border-radius: 10px; text-decoration: none">
+			<a th:href="@{/compra/{id}(id=${compra.id})}" style="text-decoration: none">Continuar Comprando</a>
+		</button>
 		<div class="cart">
 			<i id="cartIcon" class="fa fa-shopping-cart"></i> <span
 				class="cart-count" th:text="${compra.qtdAlimentos}"></span>
 			<!-- Modal -->
 			<div id="cartModal" class="modal">
 				<div class="modal-content">
-					<span class="close" id="closeModal">&times;</span>
+					<span class="close" id="closeModal">&times;</span>	
 					<h1>Detalhes da Compra</h1>
 					<p>
 						ID: <span th:text="${compra.id}"></span>

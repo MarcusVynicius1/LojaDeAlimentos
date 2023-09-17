@@ -2,16 +2,19 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link th:href="@{/css/home.css}" rel="stylesheet" />
     <title>Criar Compra</title>
 </head>
 <body>
-    <h1>Formulário de Criação de Compra</h1>
+    <h1 class="h1Geral">Formulário de Criação de Compra</h1>
+    <div style="text-align: center; margin: 0 auto;">
     <form action="/compra/criar" method="post">
         <label for="id">ID:</label><br>
-        <input type="text" id="id" name="id"><br> 
-        <label for="cpfCliente">CPF do Cliente:</label><br>
-        <input type="text" id="cpfCliente" name="cpfCliente"><br>
+        <input type="text" id="id" name="id" style="padding: 5px; border-radius: 10px"><br> 
+        <label for="cpfCliente" >CPF do Cliente:</label><br>
+        <input type="text" id="cpfCliente" name="cpfCliente" style="padding: 5px; border-radius: 10px"><br>
         <button type="submit" value="Criar">Criar</button>
     </form>
+    </div>
 </body>
 </html>

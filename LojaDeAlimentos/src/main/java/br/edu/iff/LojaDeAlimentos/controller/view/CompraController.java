@@ -39,19 +39,26 @@ public class CompraController {
 	}
 
 	@GetMapping("/{id}")
-	public String visualizarCompra(@PathVariable Long id, Model model) {
+	public String visualizarCompra(@PathVariable Long id, @RequestParam(required = false) String tipo, Model model) {
 		Compra compra = compraService.getCompraById(id);
 		List<Alimento> alimentos = alimentoService.listarAlimentos();
 		if (compra == null) {
 			return "redirect:/compra";
 		}
+
+		if (tipo != null && !tipo.isEmpty()) {
+			alimentos = alimentoService.listarAlimentosPorTipo(tipo);
+		} else {
+			alimentos = alimentoService.listarAlimentos();
+		}
+
 		Cliente cliente = compraService.getClienteDaCompra(id);
 		if (cliente != null) {
 			model.addAttribute("saldoCliente", cliente.verSaldo());
 		}
 		model.addAttribute("alimentos", alimentos);
 		model.addAttribute("compra", compra);
-		return "teste";
+		return "comprar";
 	}
 
 	@GetMapping("/criar")
@@ -66,14 +73,11 @@ public class CompraController {
 		String resultado = compraService.addCompra(cpfCliente);
 		return "redirect:/compra";
 	}
-	
 
 	@PostMapping("atualizar/{id}")
 	public String atualizarCompra(@PathVariable("id") String id, String cpf) throws Exception {
 		return compraService.atualizarCompra(id, cpf);
 	}
-
-	
 
 	@GetMapping("/{id}/adicionarAlimento")
 	public String exibirFormularioAdicaoAlimento(@PathVariable Long id, Model model) {
@@ -95,10 +99,12 @@ public class CompraController {
 	}
 
 	@PostMapping("/deletarAlimento")
-	public String deletarAlimentoDaCompra(@RequestParam Long idCompra, @RequestParam String nomeAlimento) throws Exception {
-		return compraService.removeAlimento(idCompra, nomeAlimento);
+	public String deletarAlimentoDaCompra(@RequestParam Long idCompra, @RequestParam String nomeAlimento)
+			throws Exception {
+		compraService.removeAlimento(idCompra, nomeAlimento);
+		return "redirect:/compra/" + idCompra;
 	}
-	
+
 	@PostMapping("/{id}/finalizar")
 	public String finalizarCompra(@PathVariable Long id) {
 		String resultado = compraService.finalizarCompraPeloId(id);
@@ -111,8 +117,8 @@ public class CompraController {
 		if (cliente != null) {
 			model.addAttribute("saldoCliente", cliente.verSaldo());
 		}
-		Compra compra = compraService.getCompraById(id);		
-		List<Alimento> alimentos = compraService.ListarAlimentoPeloIdCompra(id);	
+		Compra compra = compraService.getCompraById(id);
+		List<Alimento> alimentos = compraService.ListarAlimentoPeloIdCompra(id);
 		model.addAttribute("alimentos", alimentos);
 		model.addAttribute("compra", compra);
 		return "carrinho";

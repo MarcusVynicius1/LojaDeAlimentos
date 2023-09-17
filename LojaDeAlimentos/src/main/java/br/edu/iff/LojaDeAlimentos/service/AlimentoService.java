@@ -16,11 +16,11 @@ public class AlimentoService {
 	AlimentoRepository alimentoRep;
 
 	public String salvarAlimento(Alimento alimento) {
-		if(alimentoRep.buscarPeloNome(alimento.getNome())!=null) {
+		if (alimentoRep.buscarPeloNome(alimento.getNome()) != null) {
 			return "Alimento já cadastrado";
-		}else{
+		} else {
 			Alimento a = alimentoRep.save(alimento);
-			return "Registrado no id "+a.getId();
+			return "Registrado no id " + a.getId();
 		}
 	}
 
@@ -30,39 +30,43 @@ public class AlimentoService {
 
 	public String atualizarAlimento(String nome, double preco, String tipoAlimento) {
 		Alimento a = alimentoRep.buscarPeloNome(nome);
-		if(a==null) {
+		if (a == null) {
 			return "Alimento não achado";
-		}else {		
-			if(preco > 0) {
+		} else {
+			if (preco > 0) {
 				a.setPreco(preco);
 			}
-			if(tipoAlimento !=null) {				
+			if (tipoAlimento != null) {
 				a.setTipoAlimento(tipoAlimento);
 			}
 			alimentoRep.flush();
-			return "Atualizado no id "+a.getId();
+			return "Atualizado no id " + a.getId();
 		}
 	}
 
 	public String removerAlimento(String nome) {
 		Alimento a = alimentoRep.buscarPeloNome(nome);
-		if(a !=null) {	
+		if (a != null) {
 			alimentoRep.delete(a);
-			return "Alimento deletado no id "+a.getId();
-		}else {
+			return "Alimento deletado no id " + a.getId();
+		} else {
 			return "Alimento não encontrado";
 		}
 	}
-	
+
 	public Alimento buscarAlimentoPorId(Long id) {
-        return alimentoRep.findById(id).orElseThrow(() -> new EntityNotFoundException("Alimento não encontrado"));
-    }
+		return alimentoRep.findById(id).orElseThrow(() -> new EntityNotFoundException("Alimento não encontrado"));
+	}
 
 	public List<Alimento> listarAlimentosPorIds(List<Long> ids) {
 		return alimentoRep.findAllById(ids);
 	}
-	
-	  public Alimento getAlimentoByNome(String nome) {
-	        return alimentoRep.buscarPeloNome(nome);
-	    }
+
+	public List<Alimento> listarAlimentosPorTipo(String tipo) {
+		return alimentoRep.findByTipoAlimento(tipo);
+	}
+
+	public Alimento getAlimentoByNome(String nome) {
+		return alimentoRep.buscarPeloNome(nome);
+	}
 }

@@ -63,7 +63,7 @@ public class ClienteRestController {
         if (cBusca == null) {
             return "Cliente não encontrado";
         } else {
-            clienteService.deletarCliente(cBusca.getCpf());
+            clienteService.deletarCliente(id);
             return "cliente excluído";
         }
     }

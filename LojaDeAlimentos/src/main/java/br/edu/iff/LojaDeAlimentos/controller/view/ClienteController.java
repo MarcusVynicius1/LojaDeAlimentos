@@ -75,12 +75,13 @@ public class ClienteController {
 	@ResponseBody
 	public String updateCliente(@RequestParam String cpf, String nome, String email, String password, double novoSaldo) {
 		return clienteServ.atualizarCliente(cpf, nome, email, password, novoSaldo);
+		
 	}
 
 	@PostMapping("/deleteCliente")
 	@ResponseBody
-	public String deleteCliente(@RequestParam Long id, String cpf) {
-		return clienteServ.deletarCliente(cpf);
+	public String deleteCliente(@RequestParam Long id) {
+		return clienteServ.deletarCliente(id);
 
 	}
 
@@ -100,12 +101,6 @@ public class ClienteController {
 	@ResponseBody
 	public String removeTelefone(String cpf, String telefone) throws Exception {
 		return clienteServ.removeTelefone(cpf, telefone);
-	}
-
-	@PostMapping("/addSaldo")
-	@ResponseBody
-	public String adicionarSaldo(String cpf, String saldo) throws Exception {
-		return clienteServ.adcionarSaldo(cpf, saldo);
 	}
 
 	@PostMapping("/getSaldo")

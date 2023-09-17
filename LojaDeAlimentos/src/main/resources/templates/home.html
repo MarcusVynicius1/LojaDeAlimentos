@@ -1,26 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Home</title>
+<meta charset="UTF-8">
+<title>Home</title>
+<link th:href="@{/css/home.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 </head>
 <body>
-    <h1>Bem-vindo à Loja de Alimentos</h1>
-    <ul>
-    	<h1>Cliente</h1>
-        <li><a href="/cliente">Adicionar Cliente</a></li>
-        <li><a href="/cliente/crud">Alterar/Excluir/Buscar</a></li>
-        <li><a href="/compra/criar">Criar Compra</a></li>
-        <li><a href="/compra">Comprar Alimento</a></li>
-		<hr>
-        <h1>Funcionario</h1>
-        <li><a href="/funcionario/adicionar">Adicionar Funcionário</a></li>
-        <li><a href="/funcionario">Alterar/Excluir/Buscar</a></li>
-		<hr>
-        <h1>Alimento</h1>
-        <li><a href="/alimento/cadastro">Adicionar Alimento</a></li>
-        <li><a href="/alimento/listar">Alterar/Excluir/Buscar</a></li>
-		<hr>
-    </ul>
+	<div class="topbar">
+		<h1 class="h1Topo">Bem-vindo à Loja de Alimentos</h1>
+	</div>
+	<br><br>
+	<ul>
+		<h1 class="h1Geral">Área do Cliente</h1>
+		<li><button>
+				<a href="/cliente"><i class="bi bi-person-plus-fill"></i>Cadastrar</a>
+			</button></li>
+		<li><button>
+				<a href="/cliente"><i class="bi bi-person-circle"></i>Login</a>
+			</button></li>
+		<li><button>
+				<a href="/compra/criar"><i class="bi bi-plus-circle-fill"></i>Criar Lista De
+					Compra</a></li>
+		<li><button>
+				<a href="/compra">Abrir Lista De Compras</a>
+			</button></li>
+
+		<br><br><br><br><br><br>
+		<h1 class="h1Geral">Área do Funcionario</h1>
+		<li><button>
+				<a href="/cliente/crud"><i class="bi bi-pencil-square"></i>
+					Cliente</a>
+			</button></li>
+		<li><button>
+				<a href="/funcionario/adicionar"><i
+					class="bi bi-person-plus-fill"></i>Adicionar Funcionário</a>
+			</button></li>
+		<li><button>
+				<a href="/funcionario"><i class="bi bi-pencil-square"></i>Funcionario</a>
+			</button></li>
+		<li><button>
+				<a href="/alimento/cadastro"><i class="bi bi-person-plus-fill"></i>Adicionar
+					Alimento</a>
+			</button></li>
+		<li><button>
+				<a href="/alimento/listar"><i class="bi bi-pencil-square"></i>Alimento</a>
+			</button></li>
+	</ul>
 </body>
 </html>

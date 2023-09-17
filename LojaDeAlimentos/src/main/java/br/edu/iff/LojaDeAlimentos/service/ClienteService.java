@@ -51,12 +51,12 @@ public class ClienteService {
 			c.adicionarSaldo(novoSaldo);
 			
 			ClienteRep.flush();
-			return "Atualizado no id "+c.getId();
+			return "Registrado no id " + c.getId();
 		}
 	}
 	
-	public String deletarCliente(String cpf) {
-		Cliente c = ClienteRep.buscarPeloCPF(cpf);
+	public String deletarCliente(Long id) {
+		Cliente c = ClienteRep.findById(id).orElse(null);
 		if(c!=null) {	
 			ClienteRep.delete(c);
 			return "Cliente deletado no id "+c.getId();

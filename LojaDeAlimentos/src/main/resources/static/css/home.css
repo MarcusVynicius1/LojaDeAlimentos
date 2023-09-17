@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+body {
+	background-color: #496174;
+	font-family: Arial, sans-serif;
+}
+
+.topbar {
+	width: 100%;
+	height: 70px;
+	background-color: #1c262b;
+	color: #fff;
+	display: flex;
+	align-items: center;
+}
+
+.h1Topo {
+	text-align: center;
+	width: 500px;
+	margin: 0 auto;
+}
+
+.h1Geral {
+	text-align: center;
+	width: 500px;
+	height: 100px;
+	margin: 0 auto;
+}
+
+ul {
+	list-style-type: none;
+	padding: 0;
+	text-align: center;
+}
+
+li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+button {
+	padding: 5px 10px;
+	border-radius: 10px;
+	height: 50px;
+}
+
+table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+
+    a {
+        text-decoration: none;
+        color: #007bff;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }

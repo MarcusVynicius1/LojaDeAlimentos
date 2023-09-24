@@ -26,9 +26,8 @@ public class CompraRestController {
 	private CompraService compraServ;
 
 	@PostMapping
-	public String addCompra(Long id, String cpf) {
-
-		return compraServ.addCompraAPI(id, cpf);
+	public String addCompra(String cpf) {
+		return compraServ.addCompraAPI(cpf);
 
 	}
 

@@ -36,12 +36,12 @@ public class CompraService {
 		}
 	}
 
-	public String addCompraAPI(Long id, String cpf) {
+	public String addCompraAPI(String cpf) {
 		Cliente cl = clienteRep.buscarPeloCPF(cpf);
 		if (cl == null) {
 			return "Cliente não achado";
 		} else {
-			Compra compra = new Compra(id, cpf);
+			Compra compra = new Compra(cpf);
 			cl.adicionarCompra(compra);
 			Compra c = compraRep.save(compra);
 			clienteRep.flush();
@@ -113,7 +113,7 @@ public class CompraService {
 					} else {
 						c.adicionarAlimento(a);
 						compraRep.flush();
-						return "E-Book adicionado";
+						return "Alimento adicionado";
 					}
 				}
 			}
@@ -134,7 +134,7 @@ public class CompraService {
 				} else {
 					c.removerAlimento(a);
 					compraRep.flush();
-					return "sucesso";
+					return "Alimento removido com sucesso";
 				}
 			}
 		}

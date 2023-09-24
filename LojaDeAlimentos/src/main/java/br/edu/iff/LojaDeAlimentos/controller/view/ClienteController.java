@@ -73,8 +73,8 @@ public class ClienteController {
 
 	@PostMapping("/updateCliente")
 	@ResponseBody
-	public String updateCliente(@RequestParam String cpf, String nome, String email, String password, double novoSaldo) {
-		return clienteServ.atualizarCliente(cpf, nome, email, password, novoSaldo);
+	public String updateCliente(@RequestParam String cpf, String nome, String email, String password, String telefone, double novoSaldo) {
+		return clienteServ.atualizarCliente(cpf, nome, email, password, telefone, novoSaldo);
 		
 	}
 
@@ -112,5 +112,10 @@ public class ClienteController {
 		} else {
 			return "Saldo: R$" + saldo;
 		}
+	}
+	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
 	}
 }

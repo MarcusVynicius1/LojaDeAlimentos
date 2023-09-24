@@ -29,9 +29,17 @@ label {
 				style="padding: 5px; border-radius: 10px"><br> <label
 				for="password">Senha:</label> <input type="password" id="password"
 				name="password" th:value="${cliente.password}" required
-				style="padding: 5px; border-radius: 10px"><br>
+				style="padding: 5px; border-radius: 10px"><br> <label
+				for="telefone">Telefone:</label> <input type="text" id="telefone"
+				name="telefone" th:value="${cliente.telefone[0]}" required
+				style="padding: 5px; border-radius: 10px">
+
 		</div>
-		<br><br><br>
+
+
+		<br>
+		<br>
+		<br>
 		<div style="text-align: center;">
 			<h2>Carteira</h2>
 			<label for="saldo">Saldo Atual:</label> <input type="text" id="saldo"

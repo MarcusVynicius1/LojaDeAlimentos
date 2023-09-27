@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import jakarta.validation.Valid
 
 import br.edu.iff.LojaDeAlimentos.entities.Alimento;
 import br.edu.iff.LojaDeAlimentos.service.AlimentoService;
@@ -28,7 +29,7 @@ public class AlimentoController {
 	}
 
 	@PostMapping("/saveAlimento")
-	public String registerAlimento(@ModelAttribute Alimento alimento) {
+	public String registerAlimento(@Valid @ModelAttribute Alimento alimento) {
 		alimentoService.salvarAlimento(alimento);
 		return "redirect:/alimento/listar";
 											

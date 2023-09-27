@@ -10,21 +10,3 @@ Siga as instruções abaixo para configurar e executar o projeto localmente:
 2. Importe o projeto no Eclipse.
 3. Configure o banco de dados de acordo com suas necessidades no arquivo `application.properties`.
 4. Execute o aplicativo Spring Boot.
-
-## Desenvolvimento
-
-## Construção (Build)
-
-## Deploy e Publicação
-
-## Features
-
-## Configuração
-
-## Testes
-
-## Contribuições
-
-## Links
-
-## Licença

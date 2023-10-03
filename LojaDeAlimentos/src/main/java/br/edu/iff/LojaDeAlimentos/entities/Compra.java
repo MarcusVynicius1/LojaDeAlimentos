@@ -1,85 +1,98 @@
 package br.edu.iff.LojaDeAlimentos.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 
 @Entity
 public class Compra implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@Temporal(TemporalType.TIME)
-	@Column(nullable = false)
-	private Calendar dataHora;
-	@Column(nullable = false)
-	@Temporal(TemporalType.DATE)
-	private Calendar inicio;
-	@Temporal(TemporalType.DATE)
-	@Column(nullable = false)
-	private Calendar termino;
-	@Column(nullable = false)
-	private int quantidade;
-	@ManyToOne
-	private Cliente cliente;
-	@ManyToOne
-	private Alimento alimento;
+    private static final long serialVersionUID = 1L;
 
-	public Compra(Long id, Calendar dataHora, Calendar inicio, Calendar termino, int quantidade) {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
+	private Calendar dataHora;
+	private int qtdAlimentos;
+	private double precoFinal;
+	private boolean finalizado;
+	private String cpfCliente;
+	
+	@ManyToMany
+	@JoinTable(name = "associacao_compra_alimento",
+				joinColumns = @JoinColumn(name = "id_compra"),
+				inverseJoinColumns = @JoinColumn(name = "id_alimento"))
+	private List<Alimento> alimento;
+
+	public Compra(String cpfCliente) {
+		this.finalizado = false;
+		this.qtdAlimentos = 0;
+		this.alimento = new ArrayList();
+		this.cpfCliente = cpfCliente;
+	}
+
+	public Compra(Long id, String cpfCliente) {
 		this.id = id;
-		this.dataHora = Calendar.getInstance();
-		this.inicio = inicio;
-		this.termino = termino;
-		this.quantidade = quantidade;
+		this.finalizado = false;
+		this.qtdAlimentos = 0;
+		this.alimento = new ArrayList();
+		this.cpfCliente = cpfCliente;
 	}
 
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Calendar getDataHora() {
 		return dataHora;
 	}
 
-	public void setDataHora(Calendar dataHora) {
-		this.dataHora = dataHora;
+	public int getQtdAlimentos() {
+		return qtdAlimentos;
 	}
 
-	public Calendar getInicio() {
-		return inicio;
+	public double getPrecoFinal() {
+		return precoFinal;
+	}
+	
+	public String getCpfCliente() {
+		return cpfCliente;
 	}
 
-	public void setInicio(Calendar inicio) {
-		this.inicio = inicio;
+	public void setCpfCliente(String cpfCliente) {
+		this.cpfCliente = cpfCliente;
 	}
-
-	public Calendar getTermino() {
-		return termino;
+	
+	public void adicionarAlimento(Alimento Alimento) {
+		this.alimento.add(Alimento);
+		this.qtdAlimentos++;
+		this.precoFinal+=Alimento.getPreco();
 	}
-
-	public void setTermino(Calendar termino) {
-		this.termino = termino;
+	
+	public void removerAlimento(Alimento Alimento) {
+		this.alimento.remove(Alimento);
+		this.qtdAlimentos--;
+		this.precoFinal-=Alimento.getPreco();
 	}
-
-	public int getQuantidade() {
-		return quantidade;
+	
+	public void finalizar() {
+		this.finalizado = true;
+		this.dataHora = Calendar.getInstance();
 	}
-
-	public void setQuantidade(int quantidade) {
-		this.quantidade = quantidade;
+	
+	public boolean isFinalizado() {
+		return this.finalizado;
 	}
 }

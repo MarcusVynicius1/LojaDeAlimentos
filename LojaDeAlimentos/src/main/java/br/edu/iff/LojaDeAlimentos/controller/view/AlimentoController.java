@@ -1,4 +1,4 @@
-package br.edu.iff.LojaDeAlimentos.controller.view;
+	package br.edu.iff.LojaDeAlimentos.controller.view;
 
 import java.util.List;
 
@@ -24,40 +24,40 @@ public class AlimentoController {
 	@GetMapping("/cadastro")
 	public String showCadastroAlimentoForm(Model model) {
 		model.addAttribute("alimento", new Alimento());
-		return "alimento"; // nome do arquivo HTML que você criou
+		return "alimento";
 	}
 
 	@PostMapping("/saveAlimento")
 	public String registerAlimento(@ModelAttribute Alimento alimento) {
 		alimentoService.salvarAlimento(alimento);
-		return "redirect:/alimento/listar"; // redireciona para a página do formulário com uma mensagem de
-														// sucesso
+		return "redirect:/alimento/listar";
+											
 	}
-	
+
 	@GetMapping("/listar")
 	public String listarAlimentos(Model model) {
-	    List<Alimento> alimentos = alimentoService.listarAlimentos();
-	    model.addAttribute("alimentos", alimentos);
-	    return "listaAlimentos"; // Nome do arquivo HTML que exibirá a lista de alimentos
+		List<Alimento> alimentos = alimentoService.listarAlimentos();
+		model.addAttribute("alimentos", alimentos);
+		return "listaAlimentos";
 	}
+
 	@GetMapping("/editar")
 	public String editarAlimento(@RequestParam Long id, Model model) {
-	    Alimento alimento = alimentoService.buscarAlimentoPorId(id);
-	    model.addAttribute("alimento", alimento);
-	    return "editarAlimento"; // Nome do arquivo HTML com o formulário de edição do alimento
+		Alimento alimento = alimentoService.buscarAlimentoPorId(id);
+		model.addAttribute("alimento", alimento);
+		return "editarAlimento";
 	}
 
 	@PostMapping("/atualizar")
-	public String atualizarAlimento(@ModelAttribute Alimento alimento) {
-	    alimentoService.atualizarAlimento(alimento);
-	    return "redirect:/alimento/listar"; // Redireciona para a página que lista os alimentos após atualizar
-	}
-	
-	@GetMapping("/excluir")
-	public String excluirAlimento(@RequestParam Long id) {
-	    alimentoService.removerAlimento(id);
-	    return "redirect:/alimento/listar"; // Redireciona para a página que lista os alimentos após excluir
+	public String atualizarAlimento(@RequestParam String nome, double preco, String tipoALimento) {
+		alimentoService.atualizarAlimento(nome, preco, tipoALimento);
+		return "redirect:/alimento/listar";
 	}
 
+	@GetMapping("/excluir")
+	public String excluirAlimento(@RequestParam String nome) {
+		alimentoService.removerAlimento(nome);
+		return "redirect:/alimento/listar";
+	}
 
 }

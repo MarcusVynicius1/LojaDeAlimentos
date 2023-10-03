@@ -33,7 +33,7 @@ public class ClienteService {
 		}
 	}
 	
-	public String atualizarCliente(String cpf, String nome, String email, String senha){
+	public String atualizarCliente(String cpf, String nome, String email, String senha, double novoSaldo){
 		Cliente c = ClienteRep.buscarPeloCPF(cpf);
 		if(c==null) {
 			return "Cliente não achado";
@@ -47,6 +47,9 @@ public class ClienteService {
 			if(senha!=null) {				
 				c.setPassword(senha);
 			}
+			
+			c.adicionarSaldo(novoSaldo);
+			
 			ClienteRep.flush();
 			return "Atualizado no id "+c.getId();
 		}

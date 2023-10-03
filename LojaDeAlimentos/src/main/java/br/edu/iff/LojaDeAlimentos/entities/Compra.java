@@ -50,6 +50,10 @@ public class Compra implements Serializable {
 		this.alimento = new ArrayList();
 		this.cpfCliente = cpfCliente;
 	}
+	
+	public Compra() {
+		
+	}
 
 	public Long getId() {
 		return id;

@@ -62,4 +62,7 @@ public class AlimentoService {
 		return alimentoRep.findAllById(ids);
 	}
 	
+	  public Alimento getAlimentoByNome(String nome) {
+	        return alimentoRep.buscarPeloNome(nome);
+	    }
 }

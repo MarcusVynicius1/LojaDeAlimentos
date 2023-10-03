@@ -175,4 +175,13 @@ public class CompraService {
 		return alimentoRep.ListarAlimentoPeloIdCompra(id);
 	}
 	
+	public Cliente getClienteDaCompra(Long idCompra) {
+	    Compra compra = getCompraById(idCompra);
+	    if (compra != null) {
+	        return clienteRep.BuscarPeloIdCompra(compra.getId()); // Substitua pelo método correto que recupera o cliente a partir do ID da compra
+	    }
+	    return null;
+	}
+
+	
 }

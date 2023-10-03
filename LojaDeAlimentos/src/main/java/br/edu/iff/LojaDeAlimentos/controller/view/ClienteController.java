@@ -28,7 +28,9 @@ public class ClienteController {
 	CarteiraService carteiraServ;
 
 	@GetMapping
-	public String page() {
+	public String page(Model model) {
+		Cliente cliente = new Cliente();
+	    model.addAttribute("cliente", cliente);
 		return "cliente";
 	}
 
@@ -41,7 +43,7 @@ public class ClienteController {
 
 	@PostMapping("/addCliente")
 	@ResponseBody
-	public String addPessoa(@RequestParam Cliente cliente) {
+	public String addPessoa(Cliente cliente) {
 
 		return clienteServ.addCliente(cliente);
 	}
@@ -71,8 +73,8 @@ public class ClienteController {
 
 	@PostMapping("/updateCliente")
 	@ResponseBody
-	public String updateCliente(@RequestParam String cpf, String nome, String email, String password) {
-		return clienteServ.atualizarCliente(cpf, nome, email, password);
+	public String updateCliente(@RequestParam String cpf, String nome, String email, String password, double novoSaldo) {
+		return clienteServ.atualizarCliente(cpf, nome, email, password, novoSaldo);
 	}
 
 	@PostMapping("/deleteCliente")

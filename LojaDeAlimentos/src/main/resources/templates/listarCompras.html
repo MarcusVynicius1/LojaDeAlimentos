@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Listar Compras</title>
+</head>
+<body>
+    <h1>Lista de Compras</h1>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Data e Hora</th>
+            <th>Quantidade de Alimentos</th>
+            <th>Preço Final</th>
+            <th>Cliente</th>
+            <th>Opções</th>
+        </tr>
+        <th:block th:each="compra : ${compras}">
+            <tr>
+                <td th:text="${compra.id}"></td>
+                <td th:text="${#dates.format(compra.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></td>
+                <td th:text="${compra.qtdAlimentos}"></td>
+                <td th:text="${compra.precoFinal}"></td>
+                <td th:text="${compra.cpfCliente}"></td>
+                <td>
+                    <a th:href="@{/compra/{id}(id=${compra.id})}">Visualizar</a>
+                </td>
+            </tr>
+        </th:block>
+    </table>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link th:href="@{/css/teste.css}" rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<title>Site de Jogos</title>
+</head>
+
+<body>
+
+	<div class="topbar">
+		<div class="cart">
+			<i id="cartIcon" class="fa fa-shopping-cart"></i> <span
+				class="cart-count" th:text="${compra.qtdAlimentos}"></span>
+			<!-- Modal -->
+			<div id="cartModal" class="modal">
+				<div class="modal-content">
+					<span class="close" id="closeModal">&times;</span>
+					<h1>Detalhes da Compra</h1>
+					<p>
+						ID: <span th:text="${compra.id}"></span>
+					</p>
+					<p>
+						Data e Hora: <span
+							th:text="${#dates.format(compra.dataHora, 'HH:mm:ss')}"></span>
+					</p>
+					<p>
+						Quantidade de Alimentos: <span th:text="${compra.qtdAlimentos}"></span>
+					</p>
+					<p>
+						Preço Final: <span th:text="${compra.precoFinal}"></span>
+					</p>
+					<p>
+						Cliente: <span th:text="${compra.cpfCliente}"></span>
+					</p>
+
+					<th:block th:if="${compra.finalizado}">
+						<p>
+							Compra finalizada em: <span
+								th:text="${#dates.format(compra.dataHora, 'dd/MM/yyyy HH:mm:ss')}"></span>
+						</p>
+					</th:block>
+
+					<th:block th:unless="${compra.finalizado}">
+						<form th:action="@{/compra/{id}/finalizar(id=${compra.id})}"
+							method="post">
+							<button type="submit">Finalizar Compra</button>
+						</form>
+					</th:block>
+				</div>
+			</div>
+		</div>
+		<div class="balance">
+			Saldo: R$ <span th:text="${saldoCliente}"></span>
+		</div>
+
+	</div>
+
+	<div class="wrapper">
+		<div class="sidebar">
+			<ul>
+				<li><a href="#">Todos os Alimentos</a></li>
+				<br>
+				<li><a href="#">Verduras</a></li>
+				<br>
+				<li><a href="#">Legumes</a></li>
+				<br>
+				<li><a href="#">Frutas</a></li>
+				<br>
+				<li><a href="#">Carnes</a></li>
+			</ul>
+		</div>
+		<div class="grid-container">
+			<div th:each="alimento : ${alimentos}" class="card" th:classappend="${alimento.tipoAlimento}">
+			<div class="rectangle">
+				<h2 th:text="${alimento.nome}"></h2>
+				<p class="price">
+					R$ <span th:text="${alimento.preco}"></span>
+				</p>
+				</div>
+				<form th:action="@{/compra/{id}/adicionarAlimento(id=${compra.id})}"
+					method="post">
+					<label for="nomeAlimento" hidden></label><input type="text"
+						id="nomeAlimento" name="nomeAlimento" hidden
+						th:value="${alimento.nome}">
+					<button type="submit" value="Adicionar">Adicionar</button>
+				</form>
+			</div>
+		</div>
+</body>
+<script>
+
+const cartIcon = document.getElementById("cartIcon");
+const closeModal = document.getElementById("closeModal");
+const cartModal = document.getElementById("cartModal");
+
+cartIcon.addEventListener("click", () => {
+    cartModal.style.display = "block";
+});
+
+closeModal.addEventListener("click", () => {
+    cartModal.style.display = "none";
+});
+
+cartModal.addEventListener("click", (event) => {
+    if (event.target === cartModal) {
+        cartModal.style.display = "none";
+    }
+});
+
+</script>
+</html>

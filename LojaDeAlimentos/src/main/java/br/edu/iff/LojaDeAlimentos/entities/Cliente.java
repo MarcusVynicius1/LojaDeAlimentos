@@ -36,6 +36,16 @@ public class Cliente extends Pessoa {
 		this.telefone.add(telefone);
 		this.compra = new ArrayList();
 	}
+	
+
+    public Cliente(String nome, String email, String cpf, String password,
+                   Endereco endereco, Carteira carteira, List<String> telefone) {
+        super(nome, email, cpf, password);
+        this.endereco = endereco;
+        this.carteira = carteira;
+        this.telefone = telefone;
+        this.compra = new ArrayList<>();
+    }
 
 	public Cliente() {
 
@@ -76,9 +86,19 @@ public class Cliente extends Pessoa {
 		}
 	}
 
-	public void adicionarTelefone(String telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone.add(telefone);
 	}
+
+	public List<String> getTelefone() {
+		return telefone;
+	}
+
+
+	public void setTelefone(List<String> telefone) {
+		this.telefone = telefone;
+	}
+
 
 	public void removerTelefone(String telefone) {
 		this.telefone.remove(telefone);
